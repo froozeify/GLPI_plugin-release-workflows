@@ -45,8 +45,10 @@ jobs:
     permissions:
       contents: "write"
     uses: "glpi-project/plugin-release-workflows/.github/workflows/publish-release.yml@v1"
+    with:
+      bot-client-id: "${{ vars.GLPI_PROJECT_BOT_CLIENT_ID }}"
     secrets:
-      GLPI_PROJECT_BOT_PRIVATE_KEY: "${{ secrets.GLPI_PROJECT_BOT_PRIVATE_KEY }}"
+      bot-private-key: "${{ secrets.GLPI_PROJECT_BOT_PRIVATE_KEY }}"
 ```
 
 ## Automatically tag new version workflow
@@ -67,8 +69,10 @@ jobs:
   auto-tag-new-version:
     name: "Automatically tag new version"
     uses: "glpi-project/plugin-release-workflows/.github/workflows/auto-tag-new-version.yml@v1"
+    with:
+      bot-client-id: "${{ vars.GLPI_PROJECT_BOT_CLIENT_ID }}"
     secrets:
-      GLPI_PROJECT_BOT_PRIVATE_KEY: "${{ secrets.GLPI_PROJECT_BOT_PRIVATE_KEY }}"
+      bot-private-key: "${{ secrets.GLPI_PROJECT_BOT_PRIVATE_KEY }}"
 ```
 
 A token other than the workflow `GITHUB_TOKEN` is required, otherwise the tag push would not trigger other workflows. See [Authentication](#authentication).
@@ -78,8 +82,7 @@ A token other than the workflow `GITHUB_TOKEN` is required, otherwise the tag pu
 Both workflows accept, in this order of precedence:
 
 1. `bot-token` secret: a token (PAT or GitHub App token), used as is.
-2. `bot-client-id` input and `bot-private-key` secret. Used by a GitHub App with the `contents: write` permission.  
-    They default to the `GLPI_PROJECT_BOT_CLIENT_ID` variable and the `GLPI_PROJECT_BOT_PRIVATE_KEY` secret, which must be passed by name.
+2. `bot-client-id` input and `bot-private-key` secret. Used by a GitHub App with the `contents: write` permission.
 3. The workflow `GITHUB_TOKEN` (publish release workflow only).
 
 `github-token` is a deprecated alias of `bot-token`, used when `bot-token` is not set.

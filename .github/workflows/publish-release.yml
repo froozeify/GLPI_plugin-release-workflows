@@ -15,21 +15,20 @@ on:
         required: false
         type: string
         default: ""
-      # GitHub App client ID. Used when `bot-token` is not given.
       bot-client-id:
+        description: "GitHub App client ID. Used when `bot-token` is not given."
         required: false
         type: string
         default: ""
     secrets:
-      # A ready-made token (PAT or GitHub App token), used as is.
-      # When no token is given, the workflow `GITHUB_TOKEN` is used.
       bot-token:
+        description: "A ready-made token (PAT or GitHub App token), used as is. When no token is given, the workflow `GITHUB_TOKEN` is used."
         required: false
-      # Private key of the `bot-client-id` GitHub App.
       bot-private-key:
+        description: "Private key of the `bot-client-id` GitHub App."
         required: false
-      # Deprecated: alias of `bot-token`.
       github-token:
+        description: "Deprecated: alias of `bot-token`."
         required: false
 
 jobs:
